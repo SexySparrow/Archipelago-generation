@@ -4,27 +4,32 @@ using UnityEngine;
 
 public static class MeshGenerator
 {
-    public static MeshData GenerateTerrainMesh(float[,] heightMap)
+    public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMulti, AnimationCurve meshCurve, int detail)
     {
+        AnimationCurve animationCurve = new AnimationCurve(meshCurve.keys);
+        
         int width = heightMap.GetLength(0);
         int height = heightMap.GetLength(1);
         float topLeftX = (width - 1) / -2f;
         float topLeftZ = (height - 1) / 2f;
 
-        MeshData meshData = new MeshData(width, height);
+        int inc = (detail == 0) ? 1 : detail * 2;
+        int verticesLineCount = (width - 1) / inc + 1;
+
+        MeshData meshData = new MeshData(verticesLineCount, verticesLineCount);
         int vertexIndex = 0;
 
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < height; y += inc)
         {
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < width; x += inc)
             {
-                meshData.vertices[vertexIndex] = new Vector3(topLeftX + x, heightMap[x, y] * 20, topLeftZ - y);
+                meshData.vertices[vertexIndex] = new Vector3(topLeftX + x, animationCurve.Evaluate(heightMap[x, y]) * heightMulti, topLeftZ - y);
                 meshData.UV[vertexIndex] = new Vector2(x / (float)width, y / (float)height);
 
                 if (x < width - 1 && y < height - 1)
                 {
-                    meshData.AddTriangle(vertexIndex, vertexIndex + width + 1, vertexIndex + width);
-                    meshData.AddTriangle(vertexIndex + width + 1, vertexIndex, vertexIndex + 1);
+                    meshData.AddTriangle(vertexIndex, vertexIndex + verticesLineCount + 1, vertexIndex + verticesLineCount);
+                    meshData.AddTriangle(vertexIndex + verticesLineCount + 1, vertexIndex, vertexIndex + 1);
                 }
 
                 vertexIndex++;
@@ -60,11 +65,11 @@ public class MeshData
 
     public Mesh CreateMesh()
     {
-        Mesh mesh =  new Mesh();
+        Mesh mesh = new Mesh();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.uv = UV;
-        mesh.RecalculateNormals ();
+        mesh.RecalculateNormals();
 
         return mesh;
     }
