@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class EndlessTerrain : MonoBehaviour
 {
-    const float scale = 4f;
     const float viewerMoveThreshold = 25f;
     public infoLOD[] detailLevels;
     public static float maxViewDst = 450;
@@ -31,7 +30,7 @@ public class EndlessTerrain : MonoBehaviour
 
     void Update()
     {
-        viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale;
+        viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / mapGenerator.terrainStorage.scale;
         if  ((viewerPositionOld - viewerPosition).sqrMagnitude > viewerMoveThreshold * viewerMoveThreshold)
         {
             viewerPositionOld = viewerPosition;
@@ -105,9 +104,9 @@ public class EndlessTerrain : MonoBehaviour
             meshCollider = meshObject.AddComponent<MeshCollider>();
             meshRenderer.material = material;
 
-            meshObject.transform.position = positionV3 * scale;
+            meshObject.transform.position = positionV3 * mapGenerator.terrainStorage.scale;
             meshObject.transform.parent = parent;
-            meshObject.transform.localScale = Vector3.one * scale;
+            meshObject.transform.localScale = Vector3.one * mapGenerator.terrainStorage.scale;
             SetVisible(false);
 
             lodMeshes = new LODMesh[detailLvl.Length];

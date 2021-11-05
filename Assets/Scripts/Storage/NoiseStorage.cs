@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoiseStorage : MonoBehaviour
+[CreateAssetMenu()]
+public class NoiseStorage : Updateable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float noiseScale;
+    public int octave;
+    [Range(0, 1)]
+    public float persistance;
+    public float lacunarity;
+    public int seed;
+    public Vector2 offset;
+    public Noise.TerrainMode terrainMode;
 
-    // Update is called once per frame
-    void Update()
-    {
+    protected override void OnValidate() {
+        if (noiseScale <= 0) {
+            noiseScale = 0.0001f;
+        }
+        if (lacunarity <= 1) {
+            lacunarity = 1.0001f;
+        }
         
+        base.OnValidate();
     }
 }
