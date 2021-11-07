@@ -1,37 +1,33 @@
-## Welcome to GitHub Pages
+## Terrain Generator
 
-You can use the [editor on GitHub](https://github.com/SexySparrow/Archipelago-generation/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Description
+---
+The Endless Terrain Generator is capable of creating realistic-looking terrains textured by elevation. It can create every terrain type, from oceans, lakes and, shallow waters to snowy mountain peaks. The generator can use terrain data and noise data templates to generate different kinds of biomes. The landmass can be created in the form of continents or islands. The purpose is to only generate landmass and terrain topography, and so the generator will not add vegetation. 
 
-### Markdown
+Water is added as a plain surface but the ground beneath is also generated with various shapes and depths.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Technology
+---
+<dl>
+  <dt>C#</dt>
+  <dd>The C# scripts generate and interpret the Noise that is used to create and display the terrain.</dd>
+  <dt>Materials</dt>
+  <dd>Different materials have been created and templated so that the generator can display different-looking biomes.</dd>
+  <dt>Unity</dt>
+  <dd>The Unity game engine is used to display and vizualize the terrain data.
+    The world generated can be explored in a first person view. </dd>
+</dl>
 
-```markdown
-Syntax highlighted code block
+### Functionality
+---
+The project contains a sample scene that showcases a model setup for the terrain generator.
 
-# Header 1
-## Header 2
-### Header 3
+A new object has to be added to the Scene. On the object, the Map Generator script and the Endless script have to be present. Each script needs a couple of correlations to work, such as the player object. 
 
-- Bulleted
-- List
+The main necessities are the two storage formats added in the repository: Noise Storage and Terrain Storage. The data types can be created and configured to create custom biomes. A few examples are present in the project.
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/SexySparrow/Archipelago-generation/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+### Realeases
+---
+No realease is available yet.
