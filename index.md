@@ -16,7 +16,7 @@ Water is added as a plain surface but the ground beneath is also generated with 
   <dd>Different materials have been created and templated so that the generator can display different-looking biomes.</dd>
   <dt>Unity</dt>
   <dd>The Unity game engine is used to display and vizualize the terrain data.
-    The world generated can be explored in a first person view. </dd>
+    The generated world can be explored in a first person view. </dd>
 </dl>
 
 ### Functionality
