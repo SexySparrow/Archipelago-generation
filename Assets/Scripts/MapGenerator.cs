@@ -8,10 +8,11 @@ public class MapGenerator : MonoBehaviour
 {
     public TerrainStorage terrainStorage;
     public NoiseStorage noiseStorage;
+    public TextureData textureData;
+    public Material terrainMaterial;
     public enum DrawMode
     {
         NoiseMap,
-        ColorMap,
         Mesh,
         FalloffMap
     }
@@ -20,7 +21,6 @@ public class MapGenerator : MonoBehaviour
     [Range(0, 6)]
     public int editorLOD;
     public bool autoUpdate;
-    public TerrainType[] regions;
     float[,] falloffMap;
 
     Queue<MapThredInfo<MapData>> mapDataThredInfos = new Queue<MapThredInfo<MapData>>();
@@ -34,6 +34,11 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    void OnTextureValuesUpdated()
+    {
+        textureData.ApplyToMaterial(terrainMaterial);
+    }
+
     public void DrawMapInEditor()
     {
         MapData mapData = GenerateMapData(new Vector2(0, 0));
@@ -43,12 +48,8 @@ public class MapGenerator : MonoBehaviour
             case DrawMode.NoiseMap:
                 display.DrawTexture(TextureGenerator.TextureFromHeightMap(mapData.noiseMap));
                 break;
-
-            case DrawMode.ColorMap:
-                display.DrawTexture(TextureGenerator.TextureFromColorMap(mapData.colorMap, chunkSize, chunkSize));
-                break;
             case DrawMode.Mesh:
-                display.DrawMesh(MeshGenerator.GenerateTerrainMesh(mapData.noiseMap, terrainStorage.heightMultiplier, terrainStorage.meshCurve, editorLOD), TextureGenerator.TextureFromColorMap(mapData.colorMap, chunkSize, chunkSize));
+                display.DrawMesh(MeshGenerator.GenerateTerrainMesh(mapData.noiseMap, terrainStorage.heightMultiplier, terrainStorage.meshCurve, editorLOD));
                 break;
             case DrawMode.FalloffMap:
                 display.DrawTexture(TextureGenerator.TextureFromHeightMap(FalloffMapGenerator.GenerateFalloffMap(chunkSize)));
@@ -123,7 +124,6 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        Color[] colorMap = new Color[chunkSize * chunkSize];
         for (int y_val = 0; y_val < chunkSize + 2; y_val++)
         {
             for (int x_val = 0; x_val < chunkSize + 2; x_val++)
@@ -132,27 +132,11 @@ public class MapGenerator : MonoBehaviour
                 {
                     noiseMap[x_val, y_val] = Mathf.Clamp01(noiseMap[x_val, y_val] - falloffMap[x_val, y_val]);
                 }
-
-                if (x_val < chunkSize && y_val < chunkSize)
-                {
-                    float currentH = noiseMap[x_val, y_val];
-
-                    for (int i = 0; i < regions.Length; i++)
-                    {
-                        if (currentH >= regions[i].height)
-                        {
-                            colorMap[y_val * chunkSize + x_val] = regions[i].color;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }
             }
         }
 
-        return new MapData(noiseMap, colorMap);
+        textureData.UpdateHeights(terrainMaterial, terrainStorage.minHeight, terrainStorage.maxHeight);
+        return new MapData(noiseMap);
     }
 
     private void OnValidate()
@@ -166,6 +150,11 @@ public class MapGenerator : MonoBehaviour
         {
             noiseStorage.OnUpdate -= OnValuesUpdated;
             noiseStorage.OnUpdate += OnValuesUpdated;
+        }
+        if (textureData != null)
+        {
+            textureData.OnUpdate -= OnTextureValuesUpdated;
+            textureData.OnUpdate += OnTextureValuesUpdated;
         }
     }
 
@@ -182,22 +171,12 @@ public class MapGenerator : MonoBehaviour
     }
 }
 
-[System.Serializable]
-public struct TerrainType
-{
-    public string name;
-    public float height;
-    public Color color;
-}
-
 public struct MapData
 {
     public readonly float[,] noiseMap;
-    public readonly Color[] colorMap;
 
-    public MapData(float[,] noiseMap, Color[] colorMap)
+    public MapData(float[,] noiseMap)
     {
         this.noiseMap = noiseMap;
-        this.colorMap = colorMap;
     }
 }

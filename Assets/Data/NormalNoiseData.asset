@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: NormalNoiseData
   m_EditorClassIdentifier: 
   update: 1
-  noiseScale: 40
+  noiseScale: 35
   octave: 6
   persistance: 0.445
   lacunarity: 2
-  seed: 420
+  seed: 427
   offset: {x: 0, y: 0}
   terrainMode: 0

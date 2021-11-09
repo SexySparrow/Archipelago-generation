@@ -10,11 +10,12 @@ public class Updateable : ScriptableObject
 
     protected virtual void OnValidate() {
         if (update) {
-            NotifyUpdate();
+            UnityEditor.EditorApplication.update += NotifyUpdate;
         }
     }
     public void NotifyUpdate()
     {
+        UnityEditor.EditorApplication.update -= NotifyUpdate;
         if (OnUpdate != null)
         {
             OnUpdate();
