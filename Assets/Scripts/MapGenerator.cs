@@ -17,8 +17,9 @@ public class MapGenerator : MonoBehaviour
         FalloffMap
     }
     public DrawMode drawMode = DrawMode.NoiseMap;
-    public const int chunkSize = 239;
-    [Range(0, 6)]
+    [Range(0, MeshGenerator.numSupportedChunkSizes - 1)]
+    public int mapChunkSizeIndex;
+    [Range(0, MeshGenerator.numSupportedLODs - 1)]
     public int editorLOD;
     public bool autoUpdate;
     float[,] falloffMap;
@@ -26,6 +27,11 @@ public class MapGenerator : MonoBehaviour
     Queue<MapThredInfo<MapData>> mapDataThredInfos = new Queue<MapThredInfo<MapData>>();
     Queue<MapThredInfo<MeshData>> meshDataThredInfos = new Queue<MapThredInfo<MeshData>>();
 
+    private void Awake()
+    {
+        textureData.ApplyToMaterial(terrainMaterial);
+        textureData.UpdateHeights(terrainMaterial, terrainStorage.minHeight, terrainStorage.maxHeight);
+    }
     void OnValuesUpdated()
     {
         if (!Application.isPlaying)
@@ -39,8 +45,17 @@ public class MapGenerator : MonoBehaviour
         textureData.ApplyToMaterial(terrainMaterial);
     }
 
+    public int chunkSize
+    {
+        get
+        {
+            return MeshGenerator.supportedChunkSizes[mapChunkSizeIndex] - 1;
+        }
+    }
+
     public void DrawMapInEditor()
     {
+        textureData.UpdateHeights(terrainMaterial, terrainStorage.minHeight, terrainStorage.maxHeight);
         MapData mapData = GenerateMapData(new Vector2(0, 0));
         MapDisplay display = FindObjectOfType<MapDisplay>();
         switch (drawMode)
@@ -122,20 +137,19 @@ public class MapGenerator : MonoBehaviour
             {
                 falloffMap = FalloffMapGenerator.GenerateFalloffMap(chunkSize + 2);
             }
-        }
 
-        for (int y_val = 0; y_val < chunkSize + 2; y_val++)
-        {
-            for (int x_val = 0; x_val < chunkSize + 2; x_val++)
+
+            for (int y_val = 0; y_val < chunkSize + 2; y_val++)
             {
-                if (terrainStorage.fallOffMap)
+                for (int x_val = 0; x_val < chunkSize + 2; x_val++)
                 {
-                    noiseMap[x_val, y_val] = Mathf.Clamp01(noiseMap[x_val, y_val] - falloffMap[x_val, y_val]);
+                    if (terrainStorage.fallOffMap)
+                    {
+                        noiseMap[x_val, y_val] = Mathf.Clamp01(noiseMap[x_val, y_val] - falloffMap[x_val, y_val]);
+                    }
                 }
             }
         }
-
-        textureData.UpdateHeights(terrainMaterial, terrainStorage.minHeight, terrainStorage.maxHeight);
         return new MapData(noiseMap);
     }
 

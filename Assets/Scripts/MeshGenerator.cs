@@ -4,6 +4,9 @@ using UnityEngine;
 
 public static class MeshGenerator
 {
+	public const int numSupportedLODs = 5;
+	public const int numSupportedChunkSizes = 9;
+	public static readonly int[] supportedChunkSizes = { 48, 72, 96, 120, 144, 168, 192, 216, 240};
     public static MeshData GenerateTerrainMesh(float[,] heightMap, float heightMulti, AnimationCurve meshCurve, int detail)
     {
         AnimationCurve animationCurve = new AnimationCurve(meshCurve.keys);
@@ -156,7 +159,6 @@ public class MeshData {
 		}
 
 		return vertexNormals;
-
 	}
 
 	Vector3 SurfaceNormalFromIndices(int indexA, int indexB, int indexC) {

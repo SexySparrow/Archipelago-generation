@@ -14,6 +14,7 @@ public class NoiseStorage : Updateable
     public Vector2 offset;
     public Noise.TerrainMode terrainMode;
 
+    #if UNITY_EDITOR
     protected override void OnValidate() {
         if (noiseScale <= 0) {
             noiseScale = 0.0001f;
@@ -24,4 +25,5 @@ public class NoiseStorage : Updateable
         
         base.OnValidate();
     }
+    #endif
 }

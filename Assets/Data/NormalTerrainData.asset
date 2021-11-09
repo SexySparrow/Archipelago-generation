@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   update: 1
   scale: 4
-  fallOffMap: 0
+  fallOffMap: 1
   heightMultiplier: 40
   meshCurve:
     serializedVersion: 2

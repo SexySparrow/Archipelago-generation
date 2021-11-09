@@ -8,6 +8,7 @@ public class Updateable : ScriptableObject
     public event System.Action OnUpdate;
     public bool update;
 
+    #if UNITY_EDITOR
     protected virtual void OnValidate() {
         if (update) {
             UnityEditor.EditorApplication.update += NotifyUpdate;
@@ -21,5 +22,5 @@ public class Updateable : ScriptableObject
             OnUpdate();
         }
     }
-
+    #endif
 }
