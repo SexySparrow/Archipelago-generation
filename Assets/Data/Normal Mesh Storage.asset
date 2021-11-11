@@ -9,14 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 996d1a065a385ec42b12de314ca5784e, type: 3}
-  m_Name: NormalNoiseData
+  m_Script: {fileID: 11500000, guid: 571f481fa8b877347bc7531820dc61d6, type: 3}
+  m_Name: Normal Mesh Storage
   m_EditorClassIdentifier: 
-  update: 1
-  noiseScale: 35
-  octave: 6
-  persistance: 0.445
-  lacunarity: 2
-  seed: 427
-  offset: {x: 0, y: 0}
-  terrainMode: 0
+  update: 0
+  scale: 1
+  mapChunkSizeIndex: 4
