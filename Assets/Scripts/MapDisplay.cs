@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MapDisplay : MonoBehaviour
@@ -17,6 +15,6 @@ public class MapDisplay : MonoBehaviour
     public void DrawMesh(MeshData meshData)
     {
         meshFilter.sharedMesh = meshData.CreateMesh();
-        meshFilter.transform.localScale = Vector3.one * FindObjectOfType<MapGenerator>().meshStorage.scale;
+        meshFilter.transform.localScale = Vector3.one * FindObjectOfType<MapPreview>().meshSettings.meshScale;
     }
 }

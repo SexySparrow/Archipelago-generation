@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public static class FalloffMapGenerator
+public static class FalloffGenerator
 {
+
     public static float[,] GenerateFalloffMap(int size)
     {
         float[,] map = new float[size, size];

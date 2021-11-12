@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu()]
-public class TextureData : Updateable
+public class TextureData : Updatable
 {
     const int textureSize = 512;
     const TextureFormat textureFormat = TextureFormat.RGB565;
@@ -34,7 +32,7 @@ public class TextureData : Updateable
         material.SetFloat("maxHeight", maxHeight);
     }
 
-    Texture2DArray GetTexture2DArray (Texture2D[] textures)
+    Texture2DArray GetTexture2DArray(Texture2D[] textures)
     {
         Texture2DArray textureArray = new Texture2DArray(textureSize, textureSize, textures.Length, textureFormat, true);
         for (int i = 0; i < textures.Length; i++)
@@ -45,16 +43,17 @@ public class TextureData : Updateable
         return textureArray;
     }
 
-	[System.Serializable]
-	public class Layer {
-		public Texture2D texture;
-		public Color tint;
-		[Range(0,1)]
-		public float tintStrength;
-		[Range(0,1)]
-		public float startHeight;
-		[Range(0,1)]
-		public float blendStrength;
-		public float textureScale;
-	}
+    [System.Serializable]
+    public class Layer
+    {
+        public Texture2D texture;
+        public Color tint;
+        [Range(0, 1)]
+        public float tintStrength;
+        [Range(0, 1)]
+        public float startHeight;
+        [Range(0, 1)]
+        public float blendStrength;
+        public float textureScale;
+    }
 }

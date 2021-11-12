@@ -1,48 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class HeightMapGenerator
 {
-    public static NoiseMap GenerateHeightMap(int width, int height, NoiseStorage settings, Vector2 sampleCentre)
-    {
-        float[,] values = Noise.GenerateNoiseMap(width, height, settings.settings, sampleCentre);
 
-        AnimationCurve heightCurve = new AnimationCurve(settings.meshCurve.keys);
+    public static HeightMap GenerateHeightMap(int width, int height, HeightMapSettings settings, Vector2 sampleCentre)
+    {
+        float[,] values = Noise.GenerateNoiseMap(width, height, settings.noiseSettings, sampleCentre);
+
+        AnimationCurve heightCurve_threadsafe = new AnimationCurve(settings.heightCurve.keys);
 
         float minValue = float.MaxValue;
         float maxValue = float.MinValue;
 
-        for (int y = 0; y < height; y++)
+        for (int i = 0; i < width; i++)
         {
-            for (int x = 0; x < width; x++)
+            for (int j = 0; j < height; j++)
             {
-                values[x, y] *= heightCurve.Evaluate(values[x, y]) * settings.heightMultiplier;
+                values[i, j] *= heightCurve_threadsafe.Evaluate(values[i, j]) * settings.heightMultiplier;
 
-                if (values[x, y] > maxValue)
+                if (values[i, j] > maxValue)
                 {
-                    maxValue = values[x, y];
+                    maxValue = values[i, j];
                 }
-                if (values[x, y] < minValue)
+                if (values[i, j] < minValue)
                 {
-                    minValue = values[x, y];
+                    minValue = values[i, j];
                 }
             }
         }
 
-        return new NoiseMap(values, minValue, maxValue);
+        return new HeightMap(values, minValue, maxValue);
     }
+
 }
 
-public struct NoiseMap
+public struct HeightMap
 {
     public readonly float[,] values;
     public readonly float minValue;
     public readonly float maxValue;
 
-    public NoiseMap(float[,] noiseMap , float minValue, float maxValue)
+    public HeightMap(float[,] values, float minValue, float maxValue)
     {
-        this.values = noiseMap;
+        this.values = values;
         this.minValue = minValue;
         this.maxValue = maxValue;
     }
