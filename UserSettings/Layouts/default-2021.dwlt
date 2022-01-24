@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 156
+  controlID: 12596
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 157
+  controlID: 12597
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 158
+  controlID: 12598
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -338,7 +338,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -403,7 +403,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 1cfbffff
+      m_ExpandedIDs: f292feff4493feffec94feffeefafffff0faffffb25e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -675,9 +675,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 26.672592, y: 2.7971115, z: 141.48866}
+    m_Target: {x: -414.3938, y: -159.95325, z: -197.11824}
     speed: 2
-    m_Value: {x: 26.672592, y: 2.7971115, z: 141.48866}
+    m_Value: {x: -414.3938, y: -159.95325, z: -197.11824}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -724,13 +724,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.15856463, y: -0.8322545, z: 0.29915753, w: 0.4396138}
+    m_Target: {x: 0.09726362, y: -0.8066106, z: 0.13789733, w: 0.5669794}
     speed: 2
-    m_Value: {x: -0.15852137, y: 0.8320275, z: -0.29907593, w: -0.43949386}
+    m_Value: {x: -0.09723628, y: 0.8063839, z: -0.13785857, w: -0.5668201}
   m_Size:
-    m_Target: 155164.1
+    m_Target: 393.34763
     speed: 2
-    m_Value: 148482.39
+    m_Value: 392.9056
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -797,22 +797,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Terrain Assets
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Terrain Assets
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Adrianb\Archipelago generation
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 465e0000
-    m_LastClickedID: 24134
-    m_ExpandedIDs: 000000001c5e00001e5e000000ca9a3bffffff7f
+    m_SelectedIDs: 445f0000
+    m_LastClickedID: 24388
+    m_ExpandedIDs: 00000000445f0000465f000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -840,7 +840,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000001c5e00001e5e000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000445f0000465f000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -867,7 +867,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
